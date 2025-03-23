@@ -12,8 +12,12 @@ public final class App {
             config.bundledPlugins.enableDevLogging();
         });
 
+        List<User> users = List.of("John", "Mark", "Ann");
+
         // Описываем, что будет происходить при GET запросе на адрес /
-        app.get("/", ctx -> ctx.result("Welcome to Javalin!"));
+        // Метод json() кодирует тело ответа в JSON строку и вызывает метод result()
+        // Дополнительно устанавливает в ответе заголовок content type со значением json
+        app.get("/users", ctx -> ctx.json(users));
 
         // Возвращаем настроенное приложение
         return app;

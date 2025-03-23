@@ -1,18 +1,18 @@
 package exercise;
 
-// BEGIN
 import io.javalin.Javalin;
-// END
 
 public final class App {
 
     public static Javalin getApp() {
 
         // BEGIN
-        var app = Javalin.create();
-
-        app.get("/welcome", ctx -> ctx.result("Welcome to Hexlet!"));
-
+        var app = Javalin.create(config -> {
+            config.bundledPlugins.enableDevLogging();
+        });
+        app.get("/phones", ctx -> ctx.json(Data.getPhones()));
+        app.get("/domains", ctx -> ctx.json(Data.getDomains()));
+        app.start(7070);
         return app;
         // END
     }
